@@ -5,8 +5,22 @@
 #ifndef VGATERM_H
 #define VGATERM_H
 
-/* Hardware text mode color constants. */
-enum vga_color {
+/* The size of this struct will varry betwenn 64 bit and 32 bit compiled code.
+   on a 32 bit system the size will be 20 bytes.
+   on a 64 bit system the size will be 40 bytes. */
+typedef struct
+{
+  uint8_t color;
+  uint16_t* buffer;
+  size_t HEIGHT;
+  size_t WIDTH;
+  size_t row;
+  size_t column;
+} VgaBuffer;
+
+/* Hardware text mode color constants.
+   Each these refer to a color value that is r*/
+enum VGA_COLOR {
 	VGA_COLOR_BLACK = 0,
 	VGA_COLOR_BLUE = 1,
 	VGA_COLOR_GREEN = 2,
@@ -27,32 +41,26 @@ enum vga_color {
 
 /* This funcion returns a byte, the first nibble of that byte represents the background.
    The second nibble is the foreground color.*/
-uint8_t VgaColorInt(enum vga_color background, enum vga_color foreground);
+uint8_t CreateVgaColor(enum VGA_COLOR background, enum VGA_COLOR foreground);
 
-/* This function returns a 2 byte integer in which the first byte is a single byte color with foreground and background.
-   The second byte is a single byte character that.*/
+/* This function returns a 2 byte integer,
+   in which the first byte is a single byte color with foreground and background, and
+   the second byte is a single byte character */
 uint16_t CreateVgaChar(unsigned char character, uint8_t color);
 
-/* This function returns a pointer to the basic vga buffer.
-   width and height specify the width and height of the display.
-   Color is a single byte color value that contains the foreground and background.*/
-uint16_t* GetVgaBuffer(size_t width, size_t height, uint8_t color);
+/* This function prepares a vga buffer to be written.
+   The buffer will start completely blank.
+   NOTE If the same starting parameters are passed this function can be used to clear the buffer. */
+void CreateVgaBuffer(VgaBuffer* buffer, const size_t width, const size_t height, uint8_t color);
 
-/* Writes a character to a specified x and y coordinate, it's best to use the other write char method. */
-void VgaWriteCharRaw(uint16_t* buffer, size_t* width, char character, size_t x, size_t y, uint8_t color);
+/* Writes a character to a specified x and y coordinate in provided buffer,
+   it's best to use the other write char method. */
+void VgaWriteCharRaw(VgaBuffer* buffer, char character, size_t x, size_t y);
 
-/* Writes a character to a specified row and column in the buffer.*/
-void VgaWriteChar(uint16_t* buffer, size_t* width, size_t* height, char character, size_t* row, size_t* column, uint8_t color);
+/* Writes a character to the provided buffer at the current row/column.*/
+void VgaWriteChar(VgaBuffer* buffer, char character);
 
-/* Writes a string starting at a specified row or column. */
-void VgaWriteString
-(uint16_t* buffer,
- const size_t* width,
- const size_t* height,
- char* str,
- size_t length,
- size_t* row,
- size_t* column,
- uint8_t color);
+/* Writes a string to the provided buffer buffer at the current row/column*/
+void VgaWriteString(VgaBuffer* buffer, char* str, size_t length);
 
 #endif //VGATERM_H

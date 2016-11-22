@@ -1,6 +1,6 @@
 #include "../Include/vga_terminal.h"
 
-uint8_t VgaColorInt(enum vga_color background, enum vga_color foreground)
+uint8_t CreateVgaColor(enum VGA_COLOR background, enum VGA_COLOR foreground)
 {
 	return foreground | background << 4;
 }
@@ -10,28 +10,50 @@ uint16_t CreateVgaChar(unsigned char character, uint8_t color)
 	return (uint16_t) character | (uint16_t) color << 8;
 }
 
-uint16_t* GetVgaBuffer(size_t width, size_t height, uint8_t color) 
+void CreateVgaBuffer(VgaBuffer* buffer, size_t width, size_t height, uint8_t color) 
 {
-  uint16_t* buffer = (uint16_t*)0xB8000;
+  if(buffer == NULL)
+    return;
+  
+  buffer->buffer = (uint16_t*)0xB8000;
+  buffer->HEIGHT = height;
+  buffer->WIDTH = width;
+  buffer->color = color;
+  buffer->row = 0;
+  buffer->column = 0;
+  
   for(size_t y = 0; y < height; y++)
     {for(size_t x = 0; x < width; x++)
 	{
 	  const size_t index = y * width + x;
-	  buffer[index] = CreateVgaChar(' ', color);
+	  buffer->buffer[index] = CreateVgaChar(' ', color);
 	}
     }
-  return buffer;
 }
 
-void VgaWriteCharRaw(uint16_t* buffer, size_t* width, char character, size_t x, size_t y, uint8_t color)
+void VgaWriteCharRaw(VgaBuffer* buffer, char character, size_t x, size_t y)
 {
-  	const size_t index = y * *width + x;
-	buffer[index] = CreateVgaChar(character, color);
+  	const size_t index = y * buffer->WIDTH + x;
+	buffer->buffer[index] = CreateVgaChar(character, buffer->color);
 }
 
-void VgaWriteString(uint16_t* buffer, size_t* width, char* str, size_t length, size_t x, size_t y, uint8_t color)
+void VgaWriteChar(VgaBuffer* buffer, char character)
 {
-  for(size_t i = 0; i < length i++)
-    VgaWriteChar
-      
+  VgaWriteCharRaw(buffer, character, buffer->column, buffer->row); //Writes character to buffer.
+  if(++buffer->column == buffer->WIDTH)
+    {
+      buffer->column = 0;
+      if(++buffer->row == buffer->HEIGHT)
+	{
+	  buffer->row = 0;
+	  CreateVgaBuffer(buffer, buffer->WIDTH, buffer->HEIGHT, buffer->color); //resets the buffer to blank if full.
+	}
+    }
 }
+
+void VgaWriteString(VgaBuffer* buffer, char* str, size_t length)
+{
+  for(size_t i = 0; i < length; i++)
+    VgaWriteChar(buffer, str[i]);
+}
+
