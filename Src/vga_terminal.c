@@ -33,12 +33,18 @@ void CreateVgaBuffer(VgaBuffer* buffer, size_t width, size_t height, uint8_t col
 
 void VgaWriteCharRaw(VgaBuffer* buffer, char character, size_t x, size_t y)
 {
-  	const size_t index = y * buffer->WIDTH + x;
-	buffer->buffer[index] = CreateVgaChar(character, buffer->color);
+  if(buffer == NULL)
+    return;
+  
+  const size_t index = y * buffer->WIDTH + x;
+  buffer->buffer[index] = CreateVgaChar(character, buffer->color);
 }
 
 void VgaWriteChar(VgaBuffer* buffer, char character)
 {
+  if(buffer == NULL)
+    return;
+  
   VgaWriteCharRaw(buffer, character, buffer->column, buffer->row); //Writes character to buffer.
   if(++buffer->column == buffer->WIDTH)
     {
@@ -53,6 +59,9 @@ void VgaWriteChar(VgaBuffer* buffer, char character)
 
 void VgaWriteString(VgaBuffer* buffer, char* str, size_t length)
 {
+  if(buffer == NULL)
+    return;
+  
   for(size_t i = 0; i < length; i++)
     VgaWriteChar(buffer, str[i]);
 }
