@@ -8,7 +8,7 @@
 #define NUM_KEYS 47
 
 
-enum KeyValues
+enum KEY_VALUES
   {
     KEY_BACK_TICK = 0,
     KEY_ONE = 1,
