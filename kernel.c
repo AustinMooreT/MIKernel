@@ -1,15 +1,10 @@
-#include "Include/vga_terminal.h"
-#include "Include/Tools/string.h"
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
+#include "kernel.h"
+
+/* Execution begins here. */
 
 void kernel_main(void)
 {
-  VgaBuffer screen_buffer;
-  CreateVgaBuffer(&screen_buffer, 75, 80, CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE));
-
-  char* message = "MIKernel version: meme";
-  VgaWriteString(&screen_buffer, message, Strlen(message));
+  CreateVgaBuffer(&default_buffer_k, 75, 80, CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE));
+  printk("This is kernel version: meme");
 }
 
