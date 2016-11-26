@@ -35,7 +35,6 @@ void VgaWriteCharRaw(VgaBuffer* buffer, char character, size_t x, size_t y)
 {
   if(buffer == NULL)
     return;
-  
   const size_t index = y * buffer->WIDTH + x;
   buffer->buffer[index] = CreateVgaChar(character, buffer->color);
 }
@@ -44,19 +43,25 @@ void VgaWriteChar(VgaBuffer* buffer, char character)
 {
   if(buffer == NULL)
     return;
-  
-  VgaWriteCharRaw(buffer, character, buffer->column, buffer->row); //Writes character to buffer.
-  if(++buffer->column == buffer->WIDTH)
+  if(character == '\n')
     {
+      buffer->row++;
       buffer->column = 0;
-      if(++buffer->row == buffer->HEIGHT)
+    }
+  else
+    {
+      VgaWriteCharRaw(buffer, character, buffer->column, buffer->row); //Writes character to buffer.
+      if(++buffer->column == buffer->WIDTH)
 	{
-	  buffer->row = 0;
-	  CreateVgaBuffer(buffer, buffer->WIDTH, buffer->HEIGHT, buffer->color); //resets the buffer to blank if full.
+	  buffer->column = 0;
+	  if(++buffer->row == buffer->HEIGHT)
+	    {
+	      buffer->row = 0;
+	      CreateVgaBuffer(buffer, buffer->WIDTH, buffer->HEIGHT, buffer->color); //resets the buffer to blank if full.
+	    }
 	}
     }
 }
-
 void VgaWriteString(VgaBuffer* buffer, char* str, size_t length)
 {
   if(buffer == NULL)
@@ -67,6 +72,6 @@ void VgaWriteString(VgaBuffer* buffer, char* str, size_t length)
 }
 
 void VgaInit()
-{CreateVgaBuffer(&default_buffer_k, 100, 100, CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE));}
+{CreateVgaBuffer(&default_buffer_k, 80, 25, CreateVgaColor(VGA_COLOR_BLUE, VGA_COLOR_WHITE));}
 
 VgaBuffer default_buffer_k;
