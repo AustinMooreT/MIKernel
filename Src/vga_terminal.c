@@ -43,10 +43,25 @@ void VgaWriteChar(VgaBuffer* buffer, char character)
 {
   if(buffer == NULL)
     return;
-  if(character == '\n')
+  if(character == '\n') //Checks for newline and handles it appropriately.
     {
       buffer->row++;
       buffer->column = 0;
+    }
+  else if(character == '\b') //Checks for backspace and handles it.
+    {
+      buffer->column--;
+      VgaWriteChar(buffer, ' '); //Erases the previous character
+      //loop to move all of the characters back.
+      for(size_t y = buffer->row; y < buffer->HEIGHT; y++)
+	{for(size_t x = buffer->column; x < buffer->WIDTH; x++)
+	    {
+	      const size_t current = y * buffer->WIDTH + x;
+	      const size_t new = y * buffer->WIDTH + (x - 1);
+	      buffer->buffer[new] = buffer->buffer[current];
+	    }
+	}
+      buffer->column--; //Moves the cursor back one.
     }
   else
     {

@@ -191,6 +191,7 @@ void PollKeyboard(Keyboard* keyboard)
 	case 0x55 : KeyPressed(&keyboard->keys[KEY_EQUAL]);
 	  break;
 	  //More keypresses go here.
+	  //Also we need to add in key releases.
 	}
     }
 }
