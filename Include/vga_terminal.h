@@ -67,6 +67,6 @@ void VgaWriteString(VgaBuffer* buffer, char* str, size_t length);
 void VgaInit();
 
 /* This is the global uninitialized buffer. */
-static VgaBuffer default_buffer_k;
+extern VgaBuffer default_buffer_k;
 
 #endif //VGATERM_H

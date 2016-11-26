@@ -4,11 +4,11 @@
 
 void kernel_main(void)
 {
-  VgaBuffer buffer;
-  CreateVgaBuffer(&buffer, 75, 80, CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE));
+  VgaInit();
+  printk("MIKernel Version: 0.0.1");
   while(true)
-  {
-    VgaWriteString(&buffer, "shit", Strlen("shit"));
-  }
+    {
+      
+    }
 }
 

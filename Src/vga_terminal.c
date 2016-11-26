@@ -67,4 +67,6 @@ void VgaWriteString(VgaBuffer* buffer, char* str, size_t length)
 }
 
 void VgaInit()
-{CreateVgaBuffer(&default_buffer_k, 75, 80, CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE));}
+{CreateVgaBuffer(&default_buffer_k, 100, 100, CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE));}
+
+VgaBuffer default_buffer_k;

@@ -22,5 +22,4 @@ void outb(uint16_t port, uint8_t value)
 
 void printk(char* message)
 {
-  VgaWriteString(&default_buffer_k, "test", Strlen("test"));
   VgaWriteString(&default_buffer_k, message, Strlen(message));}
