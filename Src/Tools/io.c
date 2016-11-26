@@ -13,7 +13,7 @@ void outb(uint16_t port, uint8_t value)
 {
     asm volatile ( "outb %0, %1" : : "a"(value), "Nd"(port) );
     /* There's an outb %al, $imm8  encoding, 
-       for compile-time constant port numbers that fit in 8b (N constraint).
+       for compil e-time constant port numbers that fit in 8b (N constraint).
        Wider immediate constants would be truncated at assemble-time (e.g. "i" constraint).
        The  outb  %al, %dx  encoding is the only option for all other cases.
        %1 expands to %dx because  port  is a uint16_t.
@@ -21,4 +21,6 @@ void outb(uint16_t port, uint8_t value)
 }
 
 void printk(char* message)
-{VgaWriteString(&default_buffer_k, message, Strlen(message));}
+{
+  VgaWriteString(&default_buffer_k, "test", Strlen("test"));
+  VgaWriteString(&default_buffer_k, message, Strlen(message));}

@@ -63,6 +63,9 @@ void VgaWriteChar(VgaBuffer* buffer, char character);
 /* Writes a string to the provided buffer buffer at the current row/column*/
 void VgaWriteString(VgaBuffer* buffer, char* str, size_t length);
 
+/* Initiates the default buffer */
+void VgaInit();
+
 /* This is the global uninitialized buffer. */
 static VgaBuffer default_buffer_k;
 

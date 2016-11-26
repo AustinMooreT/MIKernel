@@ -112,6 +112,85 @@ void PollKeyboard(Keyboard* keyboard)
     {
       switch (scancode)
 	{
-	case : 
+	case 0x1C : KeyPressed(&keyboard->keys[KEY_A]);
+	  break;
+	case 0x32 : KeyPressed(&keyboard->keys[KEY_B]);
+	  break;
+	case 0x21 : KeyPressed(&keyboard->keys[KEY_C]);
+	  break;
+	case 0x23 : KeyPressed(&keyboard->keys[KEY_D]);
+	  break;
+	case 0x24 : KeyPressed(&keyboard->keys[KEY_E]);
+	  break;
+	case 0x2B : KeyPressed(&keyboard->keys[KEY_F]);
+	  break;
+	case 0x34 : KeyPressed(&keyboard->keys[KEY_G]);
+	  break;
+	case 0x33 : KeyPressed(&keyboard->keys[KEY_H]);
+	  break;
+	case 0x43 : KeyPressed(&keyboard->keys[KEY_I]);
+	  break;
+	case 0x3B : KeyPressed(&keyboard->keys[KEY_J]);
+	  break;
+	case 0x42 : KeyPressed(&keyboard->keys[KEY_K]);
+	  break;
+	case 0x4B : KeyPressed(&keyboard->keys[KEY_L]);
+	  break;
+	case 0x3A : KeyPressed(&keyboard->keys[KEY_M]);
+	  break;
+	case 0x31 : KeyPressed(&keyboard->keys[KEY_N]);
+	  break;
+	case 0x44 : KeyPressed(&keyboard->keys[KEY_O]);
+	  break;
+	case 0x4D : KeyPressed(&keyboard->keys[KEY_P]);
+	  break;
+	case 0x15 : KeyPressed(&keyboard->keys[KEY_Q]);
+	  break;
+	case 0x2D : KeyPressed(&keyboard->keys[KEY_R]);
+	  break;
+	case 0x1B : KeyPressed(&keyboard->keys[KEY_S]);
+	  break;
+	case 0x2C : KeyPressed(&keyboard->keys[KEY_T]);
+	  break;
+	case 0x3C : KeyPressed(&keyboard->keys[KEY_U]);
+	  break;
+	case 0x2A : KeyPressed(&keyboard->keys[KEY_V]);
+	  break;
+	case 0x1D : KeyPressed(&keyboard->keys[KEY_W]);
+	  break;
+	case 0x22 : KeyPressed(&keyboard->keys[KEY_X]);
+	  break;
+	case 0x35 : KeyPressed(&keyboard->keys[KEY_Y]);
+	  break;
+	case 0x1A : KeyPressed(&keyboard->keys[KEY_Z]);
+	  break;
+	case 0x45 : KeyPressed(&keyboard->keys[KEY_ZERO]);
+	  break;
+	case 0x16 : KeyPressed(&keyboard->keys[KEY_ONE]);
+	  break;
+	case 0x1E : KeyPressed(&keyboard->keys[KEY_TWO]);
+	  break;
+	case 0x26 : KeyPressed(&keyboard->keys[KEY_THREE]);
+	  break;
+	case 0x25 : KeyPressed(&keyboard->keys[KEY_FOUR]);
+	  break;
+	case 0x2E : KeyPressed(&keyboard->keys[KEY_FIVE]);
+	  break;
+	case 0x36 : KeyPressed(&keyboard->keys[KEY_SIX]);
+	  break;
+	case 0x3D : KeyPressed(&keyboard->keys[KEY_SEVEN]);
+	  break;
+	case 0x3E : KeyPressed(&keyboard->keys[KEY_EIGHT]);
+	  break;
+	case 0x46 : KeyPressed(&keyboard->keys[KEY_NINE]);
+	  break;
+	case 0x0E : KeyPressed(&keyboard->keys[KEY_BACK_TICK]);
+	  break;
+	case 0x4E : KeyPressed(&keyboard->keys[KEY_HYPHEN]);
+	  break;
+	case 0x55 : KeyPressed(&keyboard->keys[KEY_EQUAL]);
+	  break;
+	  //More keypresses go here.
+	}
     }
 }

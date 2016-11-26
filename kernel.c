@@ -4,7 +4,11 @@
 
 void kernel_main(void)
 {
-  CreateVgaBuffer(&default_buffer_k, 75, 80, CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE));
-  printk("This is kernel version: meme");
+  VgaBuffer buffer;
+  CreateVgaBuffer(&buffer, 75, 80, CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE));
+  while(true)
+  {
+    VgaWriteString(&buffer, "shit", Strlen("shit"));
+  }
 }
 
