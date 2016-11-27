@@ -39,6 +39,16 @@ void VgaWriteCharRaw(VgaBuffer* buffer, char character, size_t x, size_t y)
   buffer->buffer[index] = CreateVgaChar(character, buffer->color);
 }
 
+/* This function is quite bad, and assumes the state of a lot of the vga hardware.*/
+void VgaUpdateCursor(VgaBuffer* buffer)
+{
+  uint16_t current_position = (buffer->row * 80) + buffer->column;
+  outb(0x3D4, 0x0F);
+  outb(0x3D5, (current_position & 0xFF));
+  outb(0x3D4, 0x0E);
+  outb(0x3D5, ((current_position >> 8) & 0xFF));
+}
+
 void VgaWriteChar(VgaBuffer* buffer, char character)
 {
   if(buffer == NULL)
@@ -76,6 +86,7 @@ void VgaWriteChar(VgaBuffer* buffer, char character)
 	    }
 	}
     }
+  VgaUpdateCursor(buffer);
 }
 void VgaWriteString(VgaBuffer* buffer, char* str, size_t length)
 {
@@ -86,7 +97,20 @@ void VgaWriteString(VgaBuffer* buffer, char* str, size_t length)
     VgaWriteChar(buffer, str[i]);
 }
 
+void VgaCursor()
+{
+  if(default_buffer_k.color == CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE))
+    {
+      const size_t index = default_buffer_k.row * default_buffer_k.WIDTH + default_buffer_k. column;
+      default_buffer_k.buffer[index] =
+	default_buffer_k.buffer[index] | (uint16_t)CreateVgaColor(VGA_COLOR_BLACK, VGA_COLOR_WHITE) << 8;
+    }
+}
+
 void VgaInit()
 {CreateVgaBuffer(&default_buffer_k, 80, 25, CreateVgaColor(VGA_COLOR_BLUE, VGA_COLOR_WHITE));}
 
 VgaBuffer default_buffer_k;
+
+void printk(char* str)
+{VgaWriteString(&default_buffer_k, str, Strlen(str));}

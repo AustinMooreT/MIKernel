@@ -1,3 +1,4 @@
+#include "Tools/io.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -57,6 +58,9 @@ void CreateVgaBuffer(VgaBuffer* buffer, const size_t width, const size_t height,
    it's best to use the other write char method. */
 void VgaWriteCharRaw(VgaBuffer* buffer, char character, size_t x, size_t y);
 
+/* Updates the text buffers cursor to the buffers current row and column */
+void VgaUpdateCursor(VgaBuffer* buffer);
+
 /* Writes a character to the provided buffer at the current row/column.*/
 void VgaWriteChar(VgaBuffer* buffer, char character);
 
@@ -68,5 +72,8 @@ void VgaInit();
 
 /* This is the global uninitialized buffer. */
 extern VgaBuffer default_buffer_k;
+
+/*Prints a message directly to the vga out*/
+void printk(char* message);
 
 #endif //VGATERM_H

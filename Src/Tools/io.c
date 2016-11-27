@@ -19,7 +19,3 @@ void outb(uint16_t port, uint8_t value)
        %1 expands to %dx because  port  is a uint16_t.
        %w1 could be used if we had the port number a wider C type.*/
 }
-
-void printk(char* message)
-{
-  VgaWriteString(&default_buffer_k, message, Strlen(message));}
