@@ -1,4 +1,4 @@
-#include "../Include/keyboard.h"
+#include "../inc/keyboard.h"
 
 /* I personally don't really like a lot of the implementation details for ps2 keyboards.
    If you can improve upon this without breaking compatiblity in the rest of the kernel please do. */
@@ -92,10 +92,10 @@ void KeyNotPressed(Key* key)
 void KeyPressed(Key* key)
 {key->ispressed = true;}
 
-void UpdateSpecialKeys(Keyboard* keyboard, uint16_t key)
-{
-  keyboard->
-}
+//void UpdateSpecialKeys(Keyboard* keyboard, uint16_t key)
+//{
+//  keyboard->
+//}
 
 void PollKeyboard(Keyboard* keyboard)
 {

@@ -1,6 +1,6 @@
-#include "Include/keyboard.h"
-#include "Include/vga_terminal.h"
-#include "Include/Tools/io.h"
+#include "keyboard.h"
+#include "vga_terminal.h"
+#include "tools/io.h"
 
 #ifndef KERNEL_H
 #define KERNEL_H

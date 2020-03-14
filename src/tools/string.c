@@ -1,4 +1,4 @@
-#include "../../Include/Tools/string.h"
+#include "../../inc/tools/string.h"
 
 size_t Strlen(char* str)
 {

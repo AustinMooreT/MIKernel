@@ -1,4 +1,4 @@
-#include "kernel.h"
+#include "inc/kernel.h"
 
 /* Execution begins here. */
 

@@ -1,4 +1,4 @@
-#include "../Include/vga_terminal.h"
+#include "../inc/vga_terminal.h"
 
 uint8_t CreateVgaColor(enum VGA_COLOR background, enum VGA_COLOR foreground)
 {
@@ -67,8 +67,8 @@ void VgaWriteChar(VgaBuffer* buffer, char character)
 	{for(size_t x = buffer->column; x < buffer->WIDTH; x++)
 	    {
 	      const size_t current = y * buffer->WIDTH + x;
-	      const size_t new = y * buffer->WIDTH + (x - 1);
-	      buffer->buffer[new] = buffer->buffer[current];
+	      const size_t new_ = y * buffer->WIDTH + (x - 1);
+	      buffer->buffer[new_] = buffer->buffer[current];
 	    }
 	}
       buffer->column--; //Moves the cursor back one.
